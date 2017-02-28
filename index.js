@@ -51,12 +51,12 @@ class TplinkLightbulbPlatform {
     // 5 == Accessory.Categories.LIGHTBULB
     const platformAccessory = new PlatformAccessory(name, UUIDGen.generate(light.deviceId), 5)
 
-    platformAccessory.addService(Service.Lightbulb, name)
-      .addCharacteristic(Characteristic.Brightness)
+    const lightService = platformAccessory.addService(Service.Lightbulb, name)
+    lightService.addCharacteristic(Characteristic.Brightness)
 
-    platformAccessory.getService(Service.AccessoryInformation)
-      .addCharacteristic(Characteristic.FirmwareRevision)
-      .addCharacteristic(Characteristic.HardwareRevision)
+    const infoService = platformAccessory.getService(Service.AccessoryInformation)
+    infoService.addCharacteristic(Characteristic.FirmwareRevision)
+    infoService.addCharacteristic(Characteristic.HardwareRevision)
 
     platformAccessory.context.deviceId = light.deviceId
     platformAccessory.context.host = light.host
