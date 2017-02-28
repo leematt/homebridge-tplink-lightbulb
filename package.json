@@ -4,6 +4,10 @@
   "description": "TP-Link LB100/110/120 Smart Bulb plugin for Homebridge.",
   "author": "Matt Lee",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/leematt/homebridge-tplink-lightbulb"
+  },
   "main": "index.js",
   "scripts": {
     "test": "standard"
