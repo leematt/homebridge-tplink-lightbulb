@@ -1,0 +1,32 @@
+{
+  "name": "homebridge-tplink-lightbulb",
+  "version": "1.0.0",
+  "description": "TP-Link LB100/110/120 Smart Bulb plugin for Homebridge.",
+  "author": "Matt Lee",
+  "license": "MIT",
+  "main": "index.js",
+  "scripts": {
+    "test": "standard"
+  },
+  "keywords": [
+    "tplink",
+    "tp-link",
+    "lb100",
+    "lb110",
+    "lb120",
+    "lb130",
+    "smartbulb",
+    "homebridge",
+    "homebridge-plugin"
+  ],
+  "engines": {
+    "node": ">=4.4.0",
+    "homebridge": ">=0.3.0"
+  },
+  "dependencies": {
+    "tplink-lightbulb": "^1.0.23"
+  },
+  "devDependencies": {
+    "standard": "^8.6.0"
+  }
+}
