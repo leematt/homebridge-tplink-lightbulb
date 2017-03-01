@@ -4,7 +4,7 @@
 
 TP-Link LB100/110/120/130 Smart Bulb plugin for [Homebridge](https://github.com/nfarina/homebridge).
 
-It has only been tested with LB120 so far, so support for color has not yet been added, and there may be issues with other models.
+It has only been tested with [LB120](http://www.tp-link.com/us/products/details/cat-5609_LB120.html) so far, so support for color has not yet been added, and there may be issues with other models.
 
 # Installation
 
