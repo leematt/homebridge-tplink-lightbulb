@@ -28,7 +28,7 @@
     "homebridge": ">=0.3.0"
   },
   "dependencies": {
-    "tplink-lightbulb": "^1.0.23"
+    "tplink-lightbulb": "^1.0.25"
   },
   "devDependencies": {
     "standard": "^8.6.0"

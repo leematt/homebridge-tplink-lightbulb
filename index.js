@@ -1,5 +1,3 @@
-const dgram = require('dgram')
-const EventEmitter = require('events')
 const Bulb = require('tplink-lightbulb')
 
 var PlatformAccessory, Service, Characteristic, UUIDGen
@@ -11,37 +9,6 @@ module.exports = function (homebridge) {
   UUIDGen = homebridge.hap.uuid
 
   homebridge.registerPlatform('homebridge-tplink-lightbulb', 'TplinkLightbulb', TplinkLightbulbPlatform, true)
-}
-
-Bulb.scan = function () {
-  const emitter = new EventEmitter()
-  const client = dgram.createSocket('udp4')
-  client.bind(9998, undefined, () => {
-    client.setBroadcast(true)
-    const msgBuf = Bulb.encrypt(new Buffer('{"system":{"get_sysinfo":{}}}'))
-    client.send(msgBuf, 0, msgBuf.length, 9999, '255.255.255.255')
-  })
-  client.on('message', (msg, rinfo) => {
-    const decryptedMsg = this.decrypt(msg).toString('ascii')
-    const jsonMsg = JSON.parse(decryptedMsg)
-    const sysinfo = jsonMsg.system.get_sysinfo
-
-    if (sysinfo.mic_type !== 'IOT.SMARTBULB') {
-      return
-    }
-
-    const light = new Bulb(rinfo.address)
-    light._info = rinfo
-    light._sysinfo = sysinfo
-    light.host = rinfo.address
-    light.port = rinfo.port
-    light.name = sysinfo.alias
-    light.deviceId = sysinfo.deviceId
-
-    emitter.emit('light', light)
-  })
-  emitter.stop = () => client.close()
-  return emitter
 }
 
 class TplinkLightbulbPlatform {
@@ -59,7 +26,7 @@ class TplinkLightbulbPlatform {
   }
 
   scan () {
-    Bulb.scan().on('light', (light) => {
+    Bulb.scan('IOT.SMARTBULB').on('light', (light) => {
       var accessory = this.accessories.get(light.deviceId)
       if (accessory === undefined) {
         this.addAccessory(light)
