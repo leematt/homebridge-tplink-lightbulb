@@ -1,6 +1,7 @@
 # homebridge-tplink-lightbulb
 
 [![Standard - JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](http://standardjs.com/)
+[![Code Climate](https://codeclimate.com/github/leematt/homebridge-tplink-lightbulb/badges/gpa.svg)](https://codeclimate.com/github/leematt/homebridge-tplink-lightbulb)
 
 TP-Link LB100/110/120/130 Smart Bulb plugin for [Homebridge](https://github.com/nfarina/homebridge).
 
