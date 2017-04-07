@@ -11,13 +11,19 @@ It has only been tested with [LB120](http://www.tp-link.com/us/products/details/
 
 1. Install Homebridge: `npm install -g homebridge`
 2. Install this plugin: `npm install -g homebridge-tplink-lightbulb`
-3. Update Homebridge configuration with:
+3. Update Homebridge configuration (`.homebridge/config.json`) and add `{ "platform": "TplinkLightbulb" }` to `platforms`:
 
 ```json
-"platforms": [{
+"platforms": [
+  {
     "platform": "TplinkLightbulb"
-}]
+  }
+]
 ```
+
+# Troubleshooting
+
+Ensure that you've followed the [Homebridge installation and configuration instructions](https://github.com/nfarina/homebridge/blob/master/README.md), and [configured your TP-Link lightbulbs with the Kasa app](http://www.tp-link.com/us/faq-946.html).
 
 # Thanks
 
