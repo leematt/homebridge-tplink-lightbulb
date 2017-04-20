@@ -1,4 +1,6 @@
 const Bulb = require('tplink-lightbulb')
+const promiseTimeout = require('promise-timeout')
+const promiseRetry = require('promise-retry')
 
 var PlatformAccessory, Service, Characteristic, UUIDGen
 
@@ -77,6 +79,26 @@ class TplinkLightbulbAccessory {
     this.deviceId = platformAccessory.context.deviceId
   }
 
+  // Request info from bulb, retrying if the request times out
+  getInfo (light) {
+    let self = this
+
+    return promiseRetry(function(retry, number) {
+      if (number > 1) {
+        self.log.debug('Unable to contact bulb, trying again (attempt #%s)', number)
+      }
+
+      return promiseTimeout.timeout(light.info(), 2000)
+        .catch(function(err) {
+          if (err instanceof promiseTimeout.TimeoutError) {
+            retry(err)
+          }
+
+          throw err
+        })
+    })
+  }
+
   configure (light) {
     this.light = light
     this.log('Configuring:', this.platformAccessory.displayName)
@@ -86,7 +108,7 @@ class TplinkLightbulbAccessory {
     const powerCharacteristic = lightService.getCharacteristic(Characteristic.On)
     powerCharacteristic
       .on('get', (callback) => {
-        light.info().then((info) => {
+        this.getInfo(this.light).then((info) => {
           this.refresh(info)
           this.powerState = info.light_state.on_off
           callback(null, info.light_state.on_off === 1)
@@ -112,7 +134,7 @@ class TplinkLightbulbAccessory {
     const brightnessCharacteristic = lightService.getCharacteristic(Characteristic.Brightness)
     brightnessCharacteristic
       .on('get', (callback) => {
-        light.info().then((info) => {
+        this.getInfo(this.light).then((info) => {
           this.refresh(info)
 
           const brightness = info.light_state.brightness || 100
