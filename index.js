@@ -51,7 +51,7 @@ class TplinkLightbulbPlatform {
     platform.log('Lightbulb added: %s [%s]', name, light.deviceId)
 
     // 5 == Accessory.Categories.LIGHTBULB
-    const platformAccessory = new PlatformAccessory(name, UUIDGen.generate(light.deviceId), 5)
+    const platformAccessory = new PlatformAccessory(name, UUIDGen.generate(light.deviceId + light.name), 5)
 
     const lightService = platformAccessory.addService(Service.Lightbulb, name)
     lightService.addCharacteristic(Characteristic.Brightness)
