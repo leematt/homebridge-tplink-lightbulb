@@ -1,5 +1,6 @@
 # homebridge-tplink-lightbulb
 
+[![npm Version](https://img.shields.io/npm/v/homebridge-tplink-lightbulb.svg)](https://www.npmjs.com/package/homebridge-tplink-lightbulb)
 [![Standard - JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](http://standardjs.com/)
 [![Code Climate](https://codeclimate.com/github/leematt/homebridge-tplink-lightbulb/badges/gpa.svg)](https://codeclimate.com/github/leematt/homebridge-tplink-lightbulb)
 
