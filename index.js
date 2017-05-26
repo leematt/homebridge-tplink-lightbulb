@@ -1,3 +1,4 @@
+'use strict'
 const Bulb = require('tplink-lightbulb')
 const promiseTimeout = require('promise-timeout')
 const promiseRetry = require('promise-retry')
@@ -83,13 +84,13 @@ class TplinkLightbulbAccessory {
   getInfo (light) {
     let self = this
 
-    return promiseRetry(function(retry, number) {
+    return promiseRetry(function (retry, number) {
       if (number > 1) {
         self.log.debug('Unable to contact bulb, trying again (attempt #%s)', number)
       }
 
       return promiseTimeout.timeout(light.info(), 2000)
-        .catch(function(err) {
+        .catch(function (err) {
           if (err instanceof promiseTimeout.TimeoutError) {
             retry(err)
           }
