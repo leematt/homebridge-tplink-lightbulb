@@ -56,6 +56,10 @@ class TplinkLightbulbPlatform {
 
     const lightService = platformAccessory.addService(Service.Lightbulb, name)
     lightService.addCharacteristic(Characteristic.Brightness)
+    
+    // to listen to color
+    lightService.addCharacteristic(Characteristic.Hue)
+    lightService.addCharacteristic(Characteristic.Saturation)
 
     const infoService = platformAccessory.getService(Service.AccessoryInformation)
     infoService.addCharacteristic(Characteristic.FirmwareRevision)
@@ -153,6 +157,62 @@ class TplinkLightbulbAccessory {
 
         light.set(true, 0, { brightness: value }).then((status) => {
           this.log('Changed %s brightness from %s% to %s%', light.name, brightnessCharacteristic.value, value)
+          callback()
+        }).catch((reason) => {
+          this.log(reason)
+        })
+      })
+    
+    // hue characterstic
+    const hueCharacteristic = lightService.getCharacteristic(Characteristic.Hue)
+    hueCharacteristic
+      .on('get', (callback) => {
+        this.getInfo(this.light).then((info) => {
+          this.refresh(info)
+
+          const hue = info.light_state.hue || 360
+
+          callback(null, hue)
+        }).catch((reason) => {
+          this.log(reason)
+        })
+      })
+      .on('set', (value, callback) => {
+        if (value === hueCharacteristic.value) {
+          callback()
+          return
+        }
+
+        light.set(true, 0, { hue: value }).then((status) => {
+          this.log('Changed %s hue from %s to %s', light.name, hueCharacteristic.value, value);
+          callback()
+        }).catch((reason) => {
+          this.log(reason)
+        })
+      })
+
+    // saturation characterstic
+    const saturationCharacteristic = lightService.getCharacteristic(Characteristic.Saturation)
+    saturationCharacteristic
+      .on('get', (callback) => {
+        this.getInfo(this.light).then((info) => {
+          this.refresh(info)
+
+          const hue = info.light_state.saturation || 100
+
+          callback(null, hue)
+        }).catch((reason) => {
+          this.log(reason)
+        })
+      })
+      .on('set', (value, callback) => {
+        if (value === saturationCharacteristic.value) {
+          callback()
+          return
+        }
+
+        light.set(true, 0, { hue: value }).then((status) => {
+          this.log('Changed %s saturation from %s to %s', light.name, saturationCharacteristic.value, value);
           callback()
         }).catch((reason) => {
           this.log(reason)
