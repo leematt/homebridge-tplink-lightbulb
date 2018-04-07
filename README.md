@@ -2,9 +2,12 @@
 
 [![npm Version](https://img.shields.io/npm/v/homebridge-tplink-lightbulb.svg)](https://www.npmjs.com/package/homebridge-tplink-lightbulb)
 [![Standard - JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](http://standardjs.com/)
-[![Code Climate](https://codeclimate.com/github/leematt/homebridge-tplink-lightbulb/badges/gpa.svg)](https://codeclimate.com/github/leematt/homebridge-tplink-lightbulb)
 
-TP-Link LB100/110/120/130 Smart Bulb plugin for [Homebridge](https://github.com/nfarina/homebridge).
+TP-Link LB100/110/120/130 Smart Bulb plugin for [Homebridge](https://github.com/nfarina/homebridge). ***Please read [deprecation note](#deprecation) below before installing!***
+
+# Deprecation
+
+Due to a number of issues with the current version, and the integration of smart bulb support in the [homebridge-tplink-smarthome](https://github.com/plasticrake/homebridge-tplink-smarthome) plugin, this plugin has been deprecated and it is recommended that you install [homebridge-tplink-smarthome](https://github.com/plasticrake/homebridge-tplink-smarthome) instead.
 
 # Installation
 
